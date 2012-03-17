@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[/*---------------------------------------------------------------------------
+${1:Title}
+---------------------------------------------------------------------------*/]]></content>
+<tabTrigger>/*</tabTrigger>
+	<scope>source.sqf</scope>
+	<description>Block Comment</description>
+</snippet>
