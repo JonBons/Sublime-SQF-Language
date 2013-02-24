@@ -76,37 +76,51 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\s+-(?i:!)\b</string>
+			<string>(\b(and|or|not|mod)\b)|(\+|-|%|\*|\^|==|\|\|||&lt;=|&gt;=|(?&lt;!\.)\.{2}(?!\.))</string>
 			<key>name</key>
 			<string>keyword.operator.sqf</string>
-		</dict>	
-		<dict>
-			<key>match</key>
-			<string>&lt;\=|&gt;\=|\=\=|&lt;|&gt;|\!\=|!|not|&amp;&amp;|and|\|\||or</string>
-			<key>name</key>
-			<string>keyword.operator.comparison.sqf</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\+\=|-\=|\*\=|/\=|//\=|%\=|&amp;\=|\|\=|\^\=|&gt;&gt;\=|&lt;&lt;\=|\*\*\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.augmented.sqf</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(\-|\+|\*|\/|%|\^|mod)</string>
-			<key>name</key>
-			<string>keyword.operator.arithmetic.sqf</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.sqf</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>/\*</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.sqf</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\*/</string>
+					<key>name</key>
+					<string>comment.block.sqf</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>comment.line.double-slash.sqf</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.sqf</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\s*((//).*$\n?)</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>//</string>
+			<string>/\*</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -116,14 +130,8 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>$\n?</string>
-			<key>name</key>
-			<string>comment.line.sqf</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>/\*</string>
-			<key>captures</key>
+			<string>\*/</string>
+			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
@@ -131,8 +139,6 @@
 					<string>punctuation.definition.comment.sqf</string>
 				</dict>
 			</dict>
-			<key>end</key>
-			<string>\*/</string>
 			<key>name</key>
 			<string>comment.block.sqf</string>
 		</dict>
