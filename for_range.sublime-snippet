@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[for "_i" from 0 to ${1:num} do {
+
+};]]></content>
+    <tabTrigger>for</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>from 0 to XX do</description>
+</snippet>

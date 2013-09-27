@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[for "_i" from ${1:num} to 0 step -1 do {
+
+};]]></content>
+    <tabTrigger>for</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>from 0 to XX step -1 do</description>
+</snippet>
