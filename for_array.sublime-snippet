@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[for "_i" from 0 to count ${1:array} -1 do {
+	_item = ${1:array} select _i;
+};]]></content>
+    <tabTrigger>for</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>array do</description>
+</snippet>

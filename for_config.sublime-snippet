@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[for "_i" from 0 to count ${1:_confSection} -1 do {
+	_entry = ${1:_confSection} select _i;
+};]]></content>
+    <tabTrigger>for</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>config do</description>
+</snippet>
