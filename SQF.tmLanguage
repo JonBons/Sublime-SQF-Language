@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>name</key><string>SQF</string>
-    <key>fileTypes</key><array><string>sqf</string><string>sqs</string></array>
+    <key>fileTypes</key><array><string>sqf</string><string>sqs</string><string>sqm</string></array>
     <key>scopeName</key><string>source.sqf</string>
     <key>uuid</key><string>A36E13D0-57F2-3590-8ED7-F16B00AC67EC</string>
     <key>firstLineMatch</key>
