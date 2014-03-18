@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[{
+  ${0:// code...}
+} forEach ${1:array};]]></content>
+    <tabTrigger>forEach</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>forEach</description>
+</snippet>
