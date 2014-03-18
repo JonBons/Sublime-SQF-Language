@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[while {${1:condition}} do {
+  ${0:// code...}
+};]]></content>
+    <tabTrigger>while</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>while</description>
+</snippet>

@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[waitUntil {
+  ${0:// code...}
+
+  ${1:condition}
+};]]></content>
+    <tabTrigger>waitUntil</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>waitUntil</description>
+</snippet>
