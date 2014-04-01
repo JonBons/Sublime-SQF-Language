@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[if (${1:condition}) then {
+  ${2:// code...}
+else {
+  ${0:// code...}
+};]]></content>
+    <tabTrigger>if</tabTrigger>
+    <scope>source.sqf</scope>
+    <description>if else</description>
+</snippet>
