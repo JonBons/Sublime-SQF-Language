@@ -9,7 +9,7 @@
         "CuratorWaypointDoubleClicked", "CuratorWaypointEdited", "CuratorWaypointPlaced", "CuratorWaypointSelectionChanged", 
         "Dammaged", "Engine", "EpeContact", "EpeContactEnd", "EpeContactStart", "Explosion", "Fired", "FiredNear", "Fuel", "Gear", "GetIn", "GetOut", 
         "HandleDamage", "HandleHeal", "Hit", "HitPart", "Init", "IncomingMissile", "Killed", "LandedTouchDown", "LandedStopped", "Local", "Respawn", 
-        "Put", "Take", "SoundPlayed", "WeaponAssembled", "WeaponDisassembled", "MPHit", "MPKilled", "MPRespawn", "Ended", "Loaded", "MusicStart", "MusicStop"
+        "Put", "Take", "SoundPlayed", "WeaponAssembled", "WeaponDisassembled", "MPHit", "MPKilled", "MPRespawn", "Ended", "Loaded", "MusicStart", "MusicStop",
 
         "Load",
         "Unload",
