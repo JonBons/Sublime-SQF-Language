@@ -1,10 +1,12 @@
-# Sublime Text 2 - SQF Syntax Language
-Added highlighter support for Bohemia's SQF language.
+# Sublime Text - SQF Syntax Language
+This package for Sublime Text adds highlighting support for Bohemia's SQF language.
 
 ![SQF Syntax Highlighter](http://puu.sh/l6n7.png "SQF Syntax Highlighter in action!")
 
+#Automated Installation
+If you have Package Control installed, open Sublime Text and hit `CTRL+SHIFT+P` and select `Package Control: Install Package` and input `SQF Language` and hit enter. You will now have the package installed.
 
-#Installation
+#Manual Installation
 Install by running `git clone git@github.com:JonBons/Sublime-SQF-Language.git "SQF Language"` in /Packages
 
 Or
