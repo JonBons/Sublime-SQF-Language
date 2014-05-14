@@ -895,6 +895,7 @@
         "forceSpeed",
         "forceWalk",
         "forceWeaponFire",
+        "forceWeatherChange",
         "formLeader",
         "format",
         "formatText",
