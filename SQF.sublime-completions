@@ -1913,7 +1913,67 @@
         "worldName",
         "worldToModel",
         "worldToScreen",
+
+        //ArmA 1.22
+        "enableMimics",
+        "everyContainer",
+        "forceAddUniform",
+        "isUniformAllowed",
+        "magazinesAmmoCargo",
+        "openYoutubeVideo",
+        "vectorAdd",
+        "vectorCos",
+        "vectorCrossProduct",
+        "vectorDiff",
+        "vectorDistance",
+        "vectorDistanceSqr",
+        "vectorDotProduct",
+        "vectorMagnitude",
+        "vectorMagnitudeSqr",
+        "vectorMultiply",
+        "visibleCompass",
+        "visibleGPS",
+        "visibleWatch",
+        "weaponsItemsCargo",
+
+        //ArmA 1.24
+        "allMines",
+        "configClasses",
+        "detectedMines",
+        "disableUAVConnectability",
+        "enableUAVConnectability",
+        "isUAVConnectable",
+        "mineDetectedBy",
+        "reverse",
+
+        //Arma 1.26
+        "ctrlCreate",
+        "ctrlDelete",
+        "getCargoIndex",
+        "lockCameraTo",
+        "pushBack",
+        "setTimeMultiplier",
+        "timeMultiplier",
+        "vectorFromTo",
+        "vectorNormalized",
+
+        //Arma 1.28
+        "addToRemainsCollector",
+        "getDirVisual",
+        "isInRemainsCollector",
+        "modelToWorldVisual",
+        "removeFromRemainsCollector",
+        "vectorDirVisual",
+        "vectorUpVisual",
+        "worldToModelVisual",
+
         // Deprecated in arma3
-        "clearVehicleInit", "openDSInterface", "processInitCommands", "setToneMapping", "setToneMappingParams", "setVehicleInit", "setWeaponState" 
+        "clearVehicleInit",
+        "openDSInterface",
+        "processInitCommands",
+        "setToneMapping",
+        "setToneMappingParams",
+        "setVehicleInit",
+        "setWeaponState" 
     ]
 }
