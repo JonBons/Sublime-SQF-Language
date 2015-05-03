@@ -456,6 +456,7 @@
         "animateDoor",
         "animationPhase",
         "animationState",
+        "append",
         "armoryPoints",
         "asin",
         "assert",
