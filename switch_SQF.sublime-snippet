@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+switch (_a) do { 
+	case 1 : { /*...code...*/ }; 
+	case 2 : { /*...code...*/ }; 
+	default { /*...code...*/ }; 
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>switch</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.sqf</scope>
+</snippet>
