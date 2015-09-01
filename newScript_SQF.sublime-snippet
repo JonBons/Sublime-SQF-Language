@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+/*
+	author: 			
+	version: 			1.00
+	date: 				
+	purpose: 			
+	arguments: 			None
+	return value:		None
+
+	example call: 		[] execVM ""
+*/
+
+// arguments
+_params = _this;
+
+// begin of script
+$1
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+<tabTrigger>newScript</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+<scope>source.sqf</scope>
+</snippet>
