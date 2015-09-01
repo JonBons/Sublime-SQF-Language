@@ -1,9 +1,9 @@
 <snippet>
 	<content><![CDATA[
-switch (_a) do { 
-	case 1 : { /*...code...*/ }; 
-	case 2 : { /*...code...*/ }; 
-	default { /*...code...*/ }; 
+switch (${1: _a}) do { 
+	case ${2:1} : { ${3: /*...code...*/} }; 
+	case ${4:2} : { ${5: /*...code...*/} }; 
+	default { ${6: /*...code...*/} }; 
 };
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
