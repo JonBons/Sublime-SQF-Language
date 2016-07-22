@@ -1567,6 +1567,7 @@
         "selectLeader",
         "selectNoPlayer",
         "selectPlayer",
+        "selectRandom",
         "selectWeapon",
         "selectWeaponTurret",
         "selectedEditorObjects",
