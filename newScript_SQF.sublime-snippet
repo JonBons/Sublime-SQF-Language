@@ -1,21 +1,22 @@
 <snippet>
 	<content><![CDATA[
 /*
-	author: 			
-	version: 			1.00
-	date: 				
-	purpose: 			
-	arguments: 			None
-	return value:		None
+	author: 		${1:$TM_FULLNAME}
+	file: 			${2:$TM_FILENAME}
+	version: 		${3:1.00}
+	date: 			$4	
+	purpose: 		$5	
+	arguments: 		$6
+	return value:		$7
 
-	example call: 		[] execVM ""
+	example call: 		${8:[] execVM ""}
 */
 
 // arguments
-_params = _this;
+${9: = param [];}
 
 // begin of script
-$1
+$10
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 <tabTrigger>newScript</tabTrigger>
