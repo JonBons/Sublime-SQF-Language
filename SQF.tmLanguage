@@ -33,14 +33,6 @@
 			<key>name</key><string>keyword.operator.comparison.sqf</string>
 		</dict>
 		<dict>
-			<key>match</key><string>\+|\-|\*|\/|%|\^</string>
-			<key>name</key><string>keyword.operator.arithmetic.sqf</string>
-		</dict>
-		<dict>
-			<key>match</key><string>\=</string>
-			<key>name</key><string>keyword.operator.assignment.sqf</string>
-		</dict>
-		<dict>
 			<key>begin</key><string>//</string>
 			<key>beginCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.comment.sqf</string></dict></dict>
 			<key>end</key><string>$\n?</string>
@@ -51,6 +43,14 @@
 			<key>captures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.comment.sqf</string></dict></dict>
 			<key>end</key><string>\*/</string>
 			<key>name</key><string>comment.block.sqf</string>
+		</dict>
+		<dict>
+			<key>match</key><string>\+|\-|\*|\/|%|\^</string>
+			<key>name</key><string>keyword.operator.arithmetic.sqf</string>
+		</dict>
+		<dict>
+			<key>match</key><string>\=</string>
+			<key>name</key><string>keyword.operator.assignment.sqf</string>
 		</dict>
 		<dict>
 			<key>begin</key><string>"</string>
