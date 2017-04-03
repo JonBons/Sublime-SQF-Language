@@ -1778,6 +1778,7 @@
         "setRectangular",
         "setRepairCargo",
         "setShadowDistance",
+        "setShotParents",
         "setSide",
         "setSimpleTaskAlwaysVisible",
         "setSimpleTaskCustomData",
