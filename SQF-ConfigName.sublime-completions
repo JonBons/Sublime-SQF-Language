@@ -5,6 +5,7 @@
         "CfgExperience",
         "CfgAISkill",
         "CfgDifficulties",
+        "CfgDifficultyPresets",
         "CfgInventory",
         "CfgTextureToMaterial",
         "CfgMaterials",
