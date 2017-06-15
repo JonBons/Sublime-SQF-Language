@@ -1,7 +1,7 @@
 <snippet>
     <content><![CDATA[if (${1:condition}) then {
   ${2:// code...}
-else {
+} else {
   ${0:// code...}
 };]]></content>
     <tabTrigger>if</tabTrigger>
