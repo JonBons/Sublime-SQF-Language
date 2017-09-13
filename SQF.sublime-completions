@@ -719,7 +719,7 @@
         "diag_logSlowFrame",
         "diag_mergeConfigFile",
         "diag_recordTurretLimits",
-        "diag_resetShapes"
+        "diag_resetShapes",
         "diag_tickTime",
         "dialog",
         "diarySubjectExists",
