@@ -18,7 +18,8 @@ subl_completions = [
 
 control_keywords = [
     "if","then","else","exitwith","while","do","switch","case","default","for","from","to","step","foreach",
-    "foreachmember","foreachmemberagent","foreachmemberteam","try","throw","catch","scopename","breakto","breakout",
+    "foreachmember","foreachmemberagent","foreachmemberteam","try","throw","catch","scopename",
+    "break","breakwith","breakto","breakout","continue","continueWith"
     "with","call","spawn","preprocessfile","preprocessfilelinenumbers","execvm","execfsm",
     "not","and","or"
 ]
@@ -30,9 +31,15 @@ constant_keywords = [
 
 ignored_keywords = list(set(["private","params"] + control_keywords + constant_keywords))
 
-unary_keywords = list()
-binary_keywords = list()
-nular_keywords = list()
+unary_keywords = ["binocularitems","binocularmagazine","compilescript","createhashmapfromarray",
+    "ctrlfontheight","ctrlstyle","ctrltextcolor","ctrltooltip","ctrlurl","fileexists","flatten",
+    "forcecadetdifficulty","forceunicode","getallpylonsinfo","getobjectscale","getplayerid","gettextraw",
+    "keys","markerchannel","markerpolyline","menusetshortcut","menusettext","menuseturl","removeallbinocularitems",
+    "removeallsecondaryweaponitems","removebinocularitem","trim","tvselection","unitcombatmode"]
+binary_keywords = ["addbinocularitem","ctrlsetmouseposition","ctrlseturl","get","getordefault","insert",
+    "isnotequalto","merge","setmarkerpolyline","setmarkerpolylinelocal","setobjectscale","setunitcombatmode",
+    "tvisselected","tvsetselected","tvsortall","tvsortbyvalueall"]
+nular_keywords = ["createhashmap","diag_scope","missionnamesource",""]
 
 intercept_commands = intercept_re.finditer(intercept_hpp)
 for m in intercept_commands:
