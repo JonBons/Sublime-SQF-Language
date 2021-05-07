@@ -90,7 +90,7 @@ for keyword in nular_keywords:
     print("nular", keyword)
 
 template_text = ""
-with open("template.tmLanguage") as f:
+with open("template_file") as f:
     template_text = f.read()
 
 template_text = template_text.replace("$$CONTROL_KEYWORDS$$", '|'.join(control_keywords))
