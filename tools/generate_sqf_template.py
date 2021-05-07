@@ -34,7 +34,7 @@ constant_keywords = [
     "__EVAL","__EXEC","__FILE__","__LINE__"
 ]
 
-ignored_keywords = list(set(["private","params"] + control_keywords + constant_keywords))
+ignored_keywords = list(set(["private"] + control_keywords + constant_keywords))
 
 unary_keywords = [
     "alldiarysubjects","binocularitems","binocularmagazine",
