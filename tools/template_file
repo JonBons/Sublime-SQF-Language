@@ -23,7 +23,7 @@
             <key>name</key><string>keyword.control.import.sqf</string>
         </dict>
         <dict>
-            <key>match</key><string>private|params|\#define|\#undef</string>
+            <key>match</key><string>private|\#define|\#undef</string>
             <key>name</key><string>keyword.declaration.sqf</string>
         </dict>
                 <dict>
