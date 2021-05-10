@@ -106,6 +106,10 @@
             <key>name</key><string>variable.other.sqf</string>
         </dict>
         <dict>
+            <key>match</key><string>[a-zA-Z]\w+_fnc_\w+</string>
+            <key>name</key><string>variable.function.sqf</string>
+        </dict>
+        <dict>
             <key>block</key>
             <dict>
                 <key>begin</key>
