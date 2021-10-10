@@ -1,6 +1,7 @@
 import requests
 import re
 import json
+import time
 from bs4 import BeautifulSoup
 
 intercept_re = re.compile(r'(get_(binary|unary|nular)_function).*?((?<=\(\").+?(?=\"))')
@@ -20,7 +21,7 @@ subl_completions = [
 control_keywords = [
     "if","then","else","exitwith","while","do","switch","case","default","for","from","to","step","foreach",
     "foreachmember","foreachmemberagent","foreachmemberteam","try","throw","catch","scopename",
-    "break","breakwith","breakto","breakout","continue","continueWith"
+    "break","breakwith","breakto","breakout","continue","continuewith",
     "with","call","spawn","preprocessfile","preprocessfilelinenumbers","execvm","execfsm",
     "not","and","or"
 ]
@@ -59,35 +60,35 @@ for m in intercept_commands:
     cmd_name = m.group(3)
 
     # don't include special keywords
-    if cmd_name in ignored_keywords:
+    if cmd_name.lower() in (map(lambda x: x.lower(), ignored_keywords)):
         continue
 
     if cmd_type == "unary":
-        if cmd_name in unary_keywords:
+        if cmd_name.lower() in (map(lambda x: x.lower(), unary_keywords)):
             continue
         unary_keywords.append(cmd_name)
 
     elif cmd_type == "binary":
-        if cmd_name in binary_keywords:
+        if cmd_name.lower() in (map(lambda x: x.lower(), binary_keywords)):
             continue
         binary_keywords.append(cmd_name)
 
     elif cmd_type == "nular":
-        if cmd_name in nular_keywords:
+        if cmd_name.lower() in (map(lambda x: x.lower(), nular_keywords)):
             continue
         nular_keywords.append(cmd_name) 
 
     else:
         raise Exception("Unknown cmd type:", cmd_type, cmd_name)
 
-for keyword in unary_keywords:
-    print("unary", keyword)
+# for keyword in unary_keywords:
+#     print("unary", keyword)
 
-for keyword in binary_keywords:
-    print("binary", keyword)
+# for keyword in binary_keywords:
+#     print("binary", keyword)
 
-for keyword in nular_keywords:
-    print("nular", keyword)
+# for keyword in nular_keywords:
+#     print("nular", keyword)
 
 template_text = ""
 with open("template_file") as f:
@@ -104,36 +105,47 @@ sqf_out = open("sqf.tmLanguage", 'w')
 sqf_out.write(template_text)
 
 # Write generated sublime-completions (TODO: generate this from supportInfo to keep case)
-# completions_list = list(set(subl_completions + control_keywords + constant_keywords + unary_keywords + binary_keywords + nular_keywords))
-# completions_list.sort()
+completions_list = list(set(["private"] + subl_completions + control_keywords + constant_keywords + unary_keywords + binary_keywords + nular_keywords))
+completions_list.sort()
 
-# # completions_json = {
-# #     "scope": "source.sqf",
-# #     "completions": completions_list
-# # }
+f_completions = open("../SQF.sublime-completions", "r")
+completions_json = json.load(f_completions)
+completions_json_lower = []
+for x in completions_json['completions']:
+    completions_json_lower.append(x.lower())
 
-# # completions_out = open("SQF.sublime-completions", 'w')
-# # completions_out.write(json.dumps(completions_json))
+diff_completions = list(set([x.lower() for x in completions_list]) - set([x.lower() for x in completions_json_lower]))
 
-# current_completions = []
+for x in diff_completions:
+    print(x)
 
-# diff_completions = list(set([x.lower() for x in completions_list]) - set([x.lower() for x in current_completions]))
+correctCommands = []
+for cmd in diff_completions:
+    res = requests.get("https://community.bistudio.com/wiki?search=" + cmd + "&title=Special%3ASearch&go=Go")
+    time.sleep(5)
+    soup = BeautifulSoup(res.text, features="html.parser")
+    correctName = ""
+    for lnks in soup.find_all('a'):
+        if 'title' in lnks.attrs:
+            if lnks.attrs['title'].lower() == cmd:
+                correctName = lnks.text
+                break
 
-# correctCommands = []
-# for cmd in diff_completions:
-#     res = requests.get("https://community.bistudio.com/wiki?search=" + cmd + "&title=Special%3ASearch&go=Go")
-#     soup = BeautifulSoup(res.text)
-#     correctName = ""
-#     for lnks in soup.find_all('a'):
-#         if 'title' in lnks.attrs:
-#             if lnks.attrs['title'].lower() == cmd:
-#                 correctName = lnks.text
-#                 break
+    if correctName is not "":
+        print(correctName)
+        correctCommands.append(correctName)
 
-#     if correctName is not "":
-#         print(correctName)
-#         correctCommands.append(correctName)
+completions_new = completions_json['completions']
+for x in correctCommands:
+    if not (x in completions_new):
+        completions_new.append(x)
 
-# correctCommands.sort()
-# for x in correctCommands:
-#     print('"' + x + '",')
+completions_new.sort()
+
+completions_json = {
+    "scope": "source.sqf",
+    "completions": completions_new
+}
+
+completions_out = open("SQF.sublime-completions", 'w')
+completions_out.write(json.dumps(completions_json))
