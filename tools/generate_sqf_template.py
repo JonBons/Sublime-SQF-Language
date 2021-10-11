@@ -121,15 +121,20 @@ for x in diff_completions:
 
 correctCommands = []
 for cmd in diff_completions:
-    res = requests.get("https://community.bistudio.com/wiki?search=" + cmd + "&title=Special%3ASearch&go=Go")
-    time.sleep(5)
-    soup = BeautifulSoup(res.text, features="html.parser")
     correctName = ""
-    for lnks in soup.find_all('a'):
-        if 'title' in lnks.attrs:
-            if lnks.attrs['title'].lower() == cmd:
-                correctName = lnks.text
-                break
+    res = requests.get("https://community.bistudio.com/wiki?search=" + cmd + "&title=Special%3ASearch&go=Go")
+    time.sleep(2)
+    if res.url != "https://community.bistudio.com/wiki?search=" + cmd + "&title=Special%3ASearch&go=Go":
+        print(cmd, "we were redirected to", res.url)
+        if res.url == "https://community.bistudio.com/wiki/" + cmd:
+            correctName = cmd
+    else:
+        soup = BeautifulSoup(res.text, features="html.parser")
+        for lnks in soup.find_all('a'):
+            if 'title' in lnks.attrs:
+                if lnks.attrs['title'].lower() == cmd:
+                    correctName = lnks.text
+                    break
 
     if correctName is not "":
         print(correctName)
