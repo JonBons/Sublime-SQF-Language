@@ -46,11 +46,11 @@ unary_keywords = [
     "opengps","removeallbinocularitems","removeallsecondaryweaponitems","removebinocularitem",
     "ropesegments","taskname","trim","tvselection","unitcombatmode"
 ]
-binary_keywords = ["addbinocularitem","ctrlsetmouseposition","ctrlseturl","fadeEnvironment",
+binary_keywords = ["addbinocularitem","ctrlsetmouseposition","ctrlseturl","fadeenvironment",
     "get","getordefault","insert","isnotequalto","merge","setmarkerpolyline",
     "setmarkerpolylinelocal","setobjectscale","setunitcombatmode",
-    "tvisselected","tvsetselected","tvsortall","tvsortbyvalueall","setCombatBehaviour",
-    "setDiarySubjectPicture","setMarkerShadow","setMarkerShadowLocal","setWeaponZeroing"]
+    "tvisselected","tvsetselected","tvsortall","tvsortbyvalueall","setcombatbehaviour",
+    "setdiarysubjectpicture","setmarkershadow","setmarkershadowlocal","setweaponzeroing"]
 nular_keywords = ["apertureparams","createhashmap","diag_dumpterrainsynth","diag_scope",
     "environmentvolume","missionnamesource","speechvolume"]
 
