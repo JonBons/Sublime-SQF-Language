@@ -136,7 +136,7 @@ for cmd in diff_completions:
                     correctName = lnks.text
                     break
 
-    if correctName is not "":
+    if correctName != "":
         print(correctName)
         correctCommands.append(correctName)
 
