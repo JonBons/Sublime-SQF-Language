@@ -1,0 +1,13 @@
+{
+  "name": "sqf-grammar-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test ./tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "plist": "^3.1.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.2.0"
+  }
+}
