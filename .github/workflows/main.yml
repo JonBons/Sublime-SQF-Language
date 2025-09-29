@@ -22,6 +22,16 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install OS deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq libxml2-utils
+
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
@@ -69,11 +79,18 @@ jobs:
       - name: Run generator
         run: |
           set -euo pipefail
-          # Your script fetches from raw GitHub URLs itself.
-          # If you ever want to force local files from /tmp, uncomment below:
-          # SQF_TMLANGUAGE_URL=file:///tmp/sqf.tmLanguage.json \
-          # CFG_TMLANGUAGE_URL=file:///tmp/arma-cfg.tmLanguage.json \
           python3 tools/generate_sqf_template.py
+
+      - name: Sanity check plist/XML
+        run: bash tools/validate_grammar.sh
+
+      - name: Install grammar test deps
+        working-directory: tools/grammar-tests
+        run: npm ci
+
+      - name: Run grammar tests (must pass before commit)
+        working-directory: tools/grammar-tests
+        run: npm test
 
       - name: Detect changes in generated artifacts
         id: diff
