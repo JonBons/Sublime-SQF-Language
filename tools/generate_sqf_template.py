@@ -19,7 +19,7 @@ RAW_CFG_URL = os.environ.get(
 # -------- Paths (relative to this script) --------
 ROOT = Path(__file__).resolve().parent
 TEMPLATE_PATH = ROOT / "template_file"          # existing template in your repo
-OUT_TMLANGUAGE = ROOT / "../sqf.tmLanguage"        # Sublime tmLanguage output
+OUT_TMLANGUAGE = ROOT / "../SQF.tmLanguage"        # Sublime tmLanguage output
 OUT_COMPLETIONS = ROOT / "../SQF.sublime-completions"
 
 # -------- Stable explicit keyword sets (from your original script) --------
