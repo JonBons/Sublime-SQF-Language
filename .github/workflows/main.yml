@@ -50,7 +50,7 @@ jobs:
           # If you ever want to force local files from /tmp, uncomment below:
           # SQF_TMLANGUAGE_URL=file:///tmp/sqf.tmLanguage.json \
           # CFG_TMLANGUAGE_URL=file:///tmp/arma-cfg.tmLanguage.json \
-          python3 generate_sqf_template.py
+          python3 tools/generate_sqf_template.py
 
       - name: Detect changes in generated artifacts
         id: diff
