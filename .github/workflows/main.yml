@@ -86,7 +86,7 @@ jobs:
 
       - name: Install grammar test deps
         working-directory: tools/grammar-tests
-        run: npm ci
+        run: npm install
 
       - name: Run grammar tests (must pass before commit)
         working-directory: tools/grammar-tests
