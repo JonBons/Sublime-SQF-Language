@@ -27,7 +27,7 @@ Or add the repo to Package Control:
 This repository includes a GitHub Action that checks the upstream SQF/Arma grammar definitions and regenerates artifacts automatically.
 
 - **Schedule:** Every **Saturday at 13:00 UTC** (`0 13 * * 6`).
-- If changes are detected, it runs `generate_sqf_template.py` and commits the updated `SQF.tmLanguage` and completions. The commit message includes the upstream version (from [vlad333000/vscode-sqf](https://github.com/vlad333000/vscode-sqf)) and the short commit hash of the upstream change.
+- It runs `generate_sqf_template.py`, if changes are detected it commits the updated `SQF.tmLanguage` and completions. The commit message includes the upstream version (from [vlad333000/vscode-sqf](https://github.com/vlad333000/vscode-sqf)) and the short commit hash of the upstream change.
 
 ## Credits
 
