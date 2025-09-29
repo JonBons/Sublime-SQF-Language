@@ -1,0 +1,74 @@
+name: Update SQF grammars
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 13 * * 6"  # runs every saturday at 13:00 UTC
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # allows the workflow to push commits using GITHUB_TOKEN
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Fetch upstream grammars to temp (not committed)
+        run: |
+          set -euo pipefail
+          curl -sSfL "https://raw.githubusercontent.com/vlad333000/vscode-sqf/refs/heads/master/syntaxes/sqf.tmLanguage.json" \
+            -o /tmp/sqf.tmLanguage.json
+          curl -sSfL "https://raw.githubusercontent.com/vlad333000/vscode-sqf/refs/heads/master/syntaxes/arma-cfg.tmLanguage.json" \
+            -o /tmp/arma-cfg.tmLanguage.json
+
+      - name: Extract version from fetched sqf.tmLanguage.json
+        id: version
+        run: |
+          set -euo pipefail
+          VERSION=$(jq -r '.version // .informationVersion // empty' /tmp/sqf.tmLanguage.json)
+          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
+            VERSION=$(date -u +'%Y-%m-%d')
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Run generator
+        run: |
+          set -euo pipefail
+          # Your script fetches from raw GitHub URLs itself.
+          # If you ever want to force local files from /tmp, uncomment below:
+          # SQF_TMLANGUAGE_URL=file:///tmp/sqf.tmLanguage.json \
+          # CFG_TMLANGUAGE_URL=file:///tmp/arma-cfg.tmLanguage.json \
+          python3 generate_sqf_template.py
+
+      - name: Detect changes in generated artifacts
+        id: diff
+        run: |
+          set -euo pipefail
+          # Stage the files the generator updates
+          git add sqf.tmLanguage SQF.sublime-completions || true
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit & push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update SQF grammar to v${{ steps.version.outputs.version }}"
+          git push
