@@ -174,3 +174,108 @@ test("Common SQF commands/functions emit function-like or support scopes", async
 
   assert.ok(sawSupportFunction, "Expected SQF commands to be scoped as functions/support");
 });
+
+test("Operators are properly scoped", async () => {
+  const grammarPath = path.resolve(process.cwd(), "..", "..", "SQF.tmLanguage");
+  const { grammar } = await loadGrammar(grammarPath);
+  const text = await fs.readFile(
+    path.resolve(process.cwd(), "fixtures", "operators.sqf"),
+    "utf8"
+  );
+
+  let ruleStack = INITIAL;
+  const lines = text.split(/\r?\n/);
+  let sawComparisonOp = false;
+  let sawArithmeticOp = false;
+
+  for (const line of lines) {
+    const { tokens, ruleStack: next } = grammar.tokenizeLine(line, ruleStack);
+    ruleStack = next;
+
+    for (const tok of tokens) {
+      if (scopesContain(tok.scopes, "keyword.operator.comparison")) sawComparisonOp = true;
+      if (scopesContain(tok.scopes, "keyword.operator.arithmetic")) sawArithmeticOp = true;
+    }
+  }
+
+  assert.ok(sawComparisonOp, "Expected comparison operators to be scoped");
+  assert.ok(sawArithmeticOp, "Expected arithmetic operators to be scoped");
+});
+
+test("Language constants are properly scoped", async () => {
+  const grammarPath = path.resolve(process.cwd(), "..", "..", "SQF.tmLanguage");
+  const { grammar } = await loadGrammar(grammarPath);
+  const text = await fs.readFile(
+    path.resolve(process.cwd(), "fixtures", "constants.sqf"),
+    "utf8"
+  );
+
+  let ruleStack = INITIAL;
+  const lines = text.split(/\r?\n/);
+  let sawLanguageConstant = false;
+
+  for (const line of lines) {
+    const { tokens, ruleStack: next } = grammar.tokenizeLine(line, ruleStack);
+    ruleStack = next;
+
+    for (const tok of tokens) {
+      if (scopesContain(tok.scopes, "constant.language")) sawLanguageConstant = true;
+    }
+  }
+
+  assert.ok(sawLanguageConstant, "Expected language constants to be scoped");
+});
+
+test("Code blocks have proper punctuation highlighting", async () => {
+  const grammarPath = path.resolve(process.cwd(), "..", "..", "SQF.tmLanguage");
+  const { grammar } = await loadGrammar(grammarPath);
+  const text = await fs.readFile(
+    path.resolve(process.cwd(), "fixtures", "blocks.sqf"),
+    "utf8"
+  );
+
+  let ruleStack = INITIAL;
+  const lines = text.split(/\r?\n/);
+  let sawBlockPunctuation = false;
+
+  for (const line of lines) {
+    const { tokens, ruleStack: next } = grammar.tokenizeLine(line, ruleStack);
+    ruleStack = next;
+
+    for (const tok of tokens) {
+      if (scopesContain(tok.scopes, "punctuation.section.block.sqf")) sawBlockPunctuation = true;
+    }
+  }
+
+  assert.ok(sawBlockPunctuation, "Expected block punctuation to be scoped");
+});
+
+test("Grammar handles illegal patterns without crashing", async () => {
+  const grammarPath = path.resolve(process.cwd(), "..", "..", "SQF.tmLanguage");
+  const { grammar } = await loadGrammar(grammarPath);
+  const text = await fs.readFile(
+    path.resolve(process.cwd(), "fixtures", "illegal.sqf"),
+    "utf8"
+  );
+
+  let ruleStack = INITIAL;
+  const lines = text.split(/\r?\n/);
+  let processedLines = 0;
+
+  // Test that the grammar can process lines with illegal patterns without crashing
+  for (const line of lines) {
+    try {
+      const { tokens, ruleStack: next } = grammar.tokenizeLine(line, ruleStack);
+      ruleStack = next;
+      processedLines++;
+      
+      // Just verify we got some tokens back (grammar didn't crash)
+      assert.ok(Array.isArray(tokens), "Expected tokens array to be returned");
+    } catch (error) {
+      assert.fail(`Grammar crashed when processing line: ${line}. Error: ${error.message}`);
+    }
+  }
+
+  assert.ok(processedLines > 0, "Expected to process at least some lines");
+  assert.ok(processedLines === lines.length, "Expected to process all lines without errors");
+});

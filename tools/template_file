@@ -15,15 +15,75 @@
     <key>patterns</key>
     <array>
         <dict>
-            <key>match</key><string>\#ifdef|\#ifndef|\#else|\#endif</string>
-            <key>name</key><string>keyword.other.sqf</string>
+            <key>begin</key><string>#\s*(ifdef|ifndef|else|endif|if)</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.control.conditional.sqf</string>
+                </dict>
+            </dict>
+            <key>end</key><string>$</string>
+            <key>name</key><string>meta.preprocessor.sqf</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key><string>\\</string>
+                    <key>end</key><string>$</string>
+                    <key>name</key><string>constant.character.escape.line-continuation.sqf</string>
+                </dict>
+            </array>
         </dict>
         <dict>
-            <key>match</key><string>\#include</string>
-            <key>name</key><string>keyword.control.import.sqf</string>
+            <key>begin</key><string>#\s*(include)</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.control.import.sqf</string>
+                </dict>
+            </dict>
+            <key>end</key><string>$</string>
+            <key>name</key><string>meta.preprocessor.include.sqf</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key><string>&lt;</string>
+                    <key>end</key><string>&gt;</string>
+                    <key>name</key><string>string.quoted.other.lt-gt.include.sqf</string>
+                </dict>
+                <dict>
+                    <key>begin</key><string>"</string>
+                    <key>end</key><string>"</string>
+                    <key>name</key><string>string.quoted.double.include.sqf</string>
+                </dict>
+            </array>
         </dict>
         <dict>
-            <key>match</key><string>private|\#define|\#undef</string>
+            <key>begin</key><string>#\s*(define|undef)</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.control.directive.sqf</string>
+                </dict>
+            </dict>
+            <key>end</key><string>$</string>
+            <key>name</key><string>meta.preprocessor.macro.sqf</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key><string>\\</string>
+                    <key>end</key><string>$</string>
+                    <key>name</key><string>constant.character.escape.line-continuation.sqf</string>
+                </dict>
+            </array>
+        </dict>
+        <dict>
+            <key>match</key><string>\bprivate\b</string>
             <key>name</key><string>keyword.declaration.sqf</string>
         </dict>
                 <dict>
@@ -52,7 +112,7 @@
         </dict>
         <dict>
             <key>match</key>
-            <string>\b0x[a-fA-F\d]+|\b\d+(\.\d+)?([eE]-?\d+)?|\.\d+([eE]-?\d+)?</string>
+            <string>\b0x[a-fA-F\d]+|\$[a-fA-F\d]+|\b\d+(\.\d+)?([eE]-?\d+)?|\.\d+([eE]-?\d+)?</string>
             <key>name</key>
             <string>constant.numeric.sqf</string>
         </dict>
@@ -86,60 +146,60 @@
             <key>end</key><string>"</string>
             <key>endCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.string.end.sqf</string></dict></dict>
             <key>name</key><string>string.quoted.double.sqf</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key><string>""</string>
+                    <key>name</key><string>constant.character.escape.sqf</string>
+                </dict>
+            </array>
         </dict>
         <dict>
             <key>begin</key><string>'</string>
             <key>beginCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.string.begin.sqf</string></dict></dict>
             <key>end</key><string>'</string>
             <key>endCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.string.end.sqf</string></dict></dict>
-            <key>name</key><string>string.quoted.sqf</string>
-        </dict>
-        <dict>
-            <key>begin</key><string>@"</string>
-            <key>beginCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.string.begin.sqf</string></dict></dict>
-            <key>end</key><string>"@</string>
-            <key>endCaptures</key><dict><key>0</key><dict><key>name</key><string>punctuation.definition.string.end.sqf</string></dict></dict>
-            <key>name</key><string>string.quoted.region.sqf</string>
-        </dict>
-        <dict>
-            <key>match</key><string>\b_[a-zA-Z_][a-zA-Z0-9_]*</string>
-            <key>name</key><string>variable.other.sqf</string>
-        </dict>
-	<dict>
-            <key>match</key><string>[a-zA-Z]\w+_fnc_\w+</string>
-            <key>name</key><string>variable.function.sqf</string>
-        </dict>
-        <dict>
-			<key>block</key>
-            <dict>
-                <key>begin</key>
-                <string>\{</string>
-                <key>beginCaptures</key>
+            <key>name</key><string>string.quoted.single.sqf</string>
+            <key>patterns</key>
+            <array>
                 <dict>
-                    <key>0</key>
-                    <dict>
-                        <key>name</key>
-                        <string>punctuation.section.block.begin.sqf</string>
-                    </dict>
+                    <key>match</key><string>&apos;&apos;</string>
+                    <key>name</key><string>constant.character.escape.sqf</string>
                 </dict>
-                <key>end</key>
-                <string>\}</string>
-                <key>endCaptures</key>
-                <dict>
-                    <key>0</key>
-                    <dict>
-                        <key>name</key>
-                        <string>punctuation.section.block.end.sqf</string>
-                    </dict>
-                </dict>
-            </dict>
-		</dict>
+            </array>
+        </dict>
         <dict>
             <key>match</key>
             <string>\b__[a-zA-Z_][a-zA-Z0-9_]*</string>
             <key>name</key>
             <string>constant.other.sqf</string>
         </dict>
+        <dict>
+            <key>match</key><string>[a-zA-Z][a-zA-Z_0-9]*_fnc_[a-zA-Z_0-9]+</string>
+            <key>name</key><string>entity.name.function.sqf</string>
+        </dict>
+        <dict>
+            <key>match</key><string>\b_[a-zA-Z][a-zA-Z0-9_]*</string>
+            <key>name</key><string>variable.other.sqf</string>
+        </dict>
+        <dict>
+            <key>match</key>
+            <string>\{|\}</string>
+            <key>name</key>
+            <string>punctuation.section.block.sqf</string>
+        </dict>
+    </array>
+
+    <key>illegal</key>
+    <array>
+        <string>\$[^a-fA-F0-9]</string>
+        <string>\w\$</string>
+        <string>\?</string>
+        <string>@</string>
+        <string> \| </string>
+        <string>[a-zA-Z_]\.</string>
+        <string>\:\=</string>
+        <string>\[\:</string>
     </array>
 
 </dict>

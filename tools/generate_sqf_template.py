@@ -29,18 +29,18 @@ SUBL_COMPLETIONS_BASE = [
 ]
 
 CONTROL_KEYWORDS = [
-    "if","then","else","exitwith","while","do","switch","case","default","for","from","to","step","foreach",
+    "if","then","else","exitwith","exit","while","do","switch","case","default","for","from","to","step","foreach",
     "foreachmember","foreachmemberagent","foreachmemberteam","try","throw","catch","scopename",
-    "break","breakwith","breakto","breakout","continue","continuewith",
+    "break","breakwith","breakto","breakout","continue","continuewith","waituntil",
     "with","call","spawn","preprocessfile","preprocessfilelinenumbers","execvm","execfsm",
     "not","and","or"
 ]
 
 CONSTANT_KEYWORDS = [
     "blufor","civilian","confignull","controlnull",
-    "displaynull","east","endl","false","grpnull","independent",
+    "displaynull","diaryrecordnull","east","endl","false","grpnull","independent",
     "linebreak","locationnull","nil","objnull","opfor","pi","resistance",
-    "scriptnull","sideambientlife","sideempty","sidelogic","sideunknown",
+    "scriptnull","sideambientlife","sideempty","sideenemy","sidefriendly","sidelogic","sideunknown",
     "tasknull","teammembernull","true","west",
     "__eval","__exec","__file__","__line__"
 ]
@@ -49,7 +49,7 @@ CONSTANT_KEYWORDS = [
 UNARY_KEYWORDS = {
     "abs","acctime","acos","asin","atan","atan2","behaviour","breakto","breakout","boundingbox",
     "boundingcenter","call","ceil","combatmode","cos","count","deleteat","diag_log","exp","floor",
-    "format","group","isnull","ln","log","max","min","objnull","player","random","round","select",
+    "format","group","isnull","ln","log","local","max","min","objnull","player","random","round","select",
     "sin","sqrt","str","tan","typename","vectordir","vectorup","vehicle"
 }
 
@@ -172,6 +172,11 @@ def main():
 
     # Extract SQF commands from VS Code grammar
     sqf_commands = extract_sqf_commands_from_vscode_grammar(sqf_grammar)
+    print(f"Extracted {len(sqf_commands)} commands from VS Code grammar")
+
+    # Use the predefined keyword sets
+    control_keywords = set(CONTROL_KEYWORDS)
+    constant_keywords = set(CONSTANT_KEYWORDS)
 
     # Add new commands to NULAR only if not already in UNARY or BINARY
     nular = set(NULAR_KEYWORDS)
@@ -184,15 +189,15 @@ def main():
 
     # Build completions
     all_for_completions = set(SUBL_COMPLETIONS_BASE) \
-        | set(CONTROL_KEYWORDS) | set(CONSTANT_KEYWORDS) \
+        | control_keywords | constant_keywords \
         | unary | binary | nular | {"private"}
 
     # Apply template
     template_text = TEMPLATE_PATH.read_text(encoding="utf-8")
     write_tm_language(
         template_text=template_text,
-        control_keywords=set(CONTROL_KEYWORDS),
-        constant_keywords=set(CONSTANT_KEYWORDS),
+        control_keywords=control_keywords,
+        constant_keywords=constant_keywords,
         unary_keywords=unary,
         binary_keywords=binary,
         nular_keywords=nular
